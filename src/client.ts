@@ -55,7 +55,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['CORE_SPEED_BASE_URL'].
+   * Defaults to process.env['MCP_STORE_CLIENT_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -109,7 +109,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['CORE_SPEED_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['MCP_STORE_CLIENT_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -122,9 +122,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Core Speed API.
+ * API Client for interfacing with the Mcp Store Client API.
  */
-export class CoreSpeed {
+export class McpStoreClient {
   apiKey: string;
 
   baseURL: string;
@@ -140,11 +140,11 @@ export class CoreSpeed {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Core Speed API.
+   * API Client for interfacing with the Mcp Store Client API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['MCP_STORE_CLIENT_API_KEY'] ?? undefined]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
-   * @param {string} [opts.baseURL=process.env['CORE_SPEED_BASE_URL'] ?? http://localhost:8000] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['MCP_STORE_CLIENT_BASE_URL'] ?? http://localhost:8000] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -153,13 +153,13 @@ export class CoreSpeed {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('CORE_SPEED_BASE_URL'),
+    baseURL = readEnv('MCP_STORE_CLIENT_BASE_URL'),
     apiKey = readEnv('MCP_STORE_CLIENT_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
-      throw new Errors.CoreSpeedError(
-        "The MCP_STORE_CLIENT_API_KEY environment variable is missing or empty; either provide it, or instantiate the CoreSpeed client with an apiKey option, like new CoreSpeed({ apiKey: 'My API Key' }).",
+      throw new Errors.McpStoreClientError(
+        "The MCP_STORE_CLIENT_API_KEY environment variable is missing or empty; either provide it, or instantiate the McpStoreClient client with an apiKey option, like new McpStoreClient({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -171,20 +171,20 @@ export class CoreSpeed {
     };
 
     if (baseURL && opts.environment) {
-      throw new Errors.CoreSpeedError(
-        'Ambiguous URL; The `baseURL` option (or CORE_SPEED_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      throw new Errors.McpStoreClientError(
+        'Ambiguous URL; The `baseURL` option (or MCP_STORE_CLIENT_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
       );
     }
 
     this.baseURL = options.baseURL || environments[options.environment || 'production'];
-    this.timeout = options.timeout ?? CoreSpeed.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? McpStoreClient.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('CORE_SPEED_LOG'), "process.env['CORE_SPEED_LOG']", this) ??
+      parseLogLevel(readEnv('MCP_STORE_CLIENT_LOG'), "process.env['MCP_STORE_CLIENT_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -704,10 +704,10 @@ export class CoreSpeed {
     }
   }
 
-  static CoreSpeed = this;
+  static McpStoreClient = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static CoreSpeedError = Errors.CoreSpeedError;
+  static McpStoreClientError = Errors.McpStoreClientError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -726,9 +726,9 @@ export class CoreSpeed {
   v1: API.V1 = new API.V1(this);
 }
 
-CoreSpeed.V1 = V1;
+McpStoreClient.V1 = V1;
 
-export declare namespace CoreSpeed {
+export declare namespace McpStoreClient {
   export type RequestOptions = Opts.RequestOptions;
 
   export { V1 as V1, type V1HealthCheckResponse as V1HealthCheckResponse };

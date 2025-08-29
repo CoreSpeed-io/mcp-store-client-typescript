@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type CoreSpeed } from '../client';
+import { type McpStoreClient } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: CoreSpeed;
+  #client: McpStoreClient;
 
   constructor(
-    client: CoreSpeed,
+    client: McpStoreClient,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: CoreSpeed,
+      client: McpStoreClient,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {

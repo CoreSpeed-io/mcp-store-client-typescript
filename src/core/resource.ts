@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { CoreSpeed } from '../client';
+import type { McpStoreClient } from '../client';
 
 export abstract class APIResource {
-  protected _client: CoreSpeed;
+  protected _client: McpStoreClient;
 
-  constructor(client: CoreSpeed) {
+  constructor(client: McpStoreClient) {
     this._client = client;
   }
 }
