@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { McpStoreClient } from 'mcp-store-client';
+import { CoreSpeed } from 'mcp-store-client';
 
-const { stringifyQuery } = McpStoreClient.prototype as any;
+const { stringifyQuery } = CoreSpeed.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

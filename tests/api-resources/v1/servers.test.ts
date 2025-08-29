@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import McpStoreClient, { toFile } from 'mcp-store-client';
+import CoreSpeed, { toFile } from 'mcp-store-client';
 
-const client = new McpStoreClient({
+const client = new CoreSpeed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -75,7 +75,7 @@ describe('resource servers', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(McpStoreClient.NotFoundError);
+    ).rejects.toThrow(CoreSpeed.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -98,7 +98,7 @@ describe('resource servers', () => {
         { '#/components/schemas/ServerListQuery': { limit: '10', sort: 'updatedAt' } },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(McpStoreClient.NotFoundError);
+    ).rejects.toThrow(CoreSpeed.NotFoundError);
   });
 
   // Prism tests are disabled
