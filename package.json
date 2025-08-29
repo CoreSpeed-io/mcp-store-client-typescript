@@ -1,8 +1,8 @@
 {
   "name": "mcp-store-client",
   "version": "0.0.1",
-  "description": "The official TypeScript library for the Mcp Store Client API",
-  "author": "Mcp Store Client <contact@corespeed.io>",
+  "description": "The official TypeScript library for the Core Speed API",
+  "author": "Core Speed <contact@corespeed.io>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
