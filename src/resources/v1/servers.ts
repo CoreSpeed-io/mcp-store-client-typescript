@@ -237,56 +237,7 @@ export namespace ServerResponse {
         /**
          * The variables of the input
          */
-        variables?: { [key: string]: EnvironmentVariable.Variables };
-      }
-
-      export namespace EnvironmentVariable {
-        export interface Variables {
-          /**
-           * The format of the input
-           */
-          format: 'string' | 'number' | 'boolean' | 'file_path';
-
-          /**
-           * Whether the input is required
-           */
-          isRequired: boolean;
-
-          /**
-           * Whether the input is a secret
-           */
-          isSecret: boolean;
-
-          /**
-           * The choices of the input
-           */
-          choices?: Array<string>;
-
-          /**
-           * The default value of the input
-           */
-          default?: string;
-
-          /**
-           * The description of the input
-           */
-          description?: string;
-
-          /**
-           * Nested properties of the input
-           */
-          properties?: { [key: string]: unknown };
-
-          /**
-           * The template of the input
-           */
-          template?: string;
-
-          /**
-           * The value of the input
-           */
-          value?: string;
-        }
+        variables?: { [key: string]: unknown };
       }
 
       export interface PackageArgument {
@@ -358,56 +309,7 @@ export namespace ServerResponse {
         /**
          * The variables of the input
          */
-        variables?: { [key: string]: PackageArgument.Variables };
-      }
-
-      export namespace PackageArgument {
-        export interface Variables {
-          /**
-           * The format of the input
-           */
-          format: 'string' | 'number' | 'boolean' | 'file_path';
-
-          /**
-           * Whether the input is required
-           */
-          isRequired: boolean;
-
-          /**
-           * Whether the input is a secret
-           */
-          isSecret: boolean;
-
-          /**
-           * The choices of the input
-           */
-          choices?: Array<string>;
-
-          /**
-           * The default value of the input
-           */
-          default?: string;
-
-          /**
-           * The description of the input
-           */
-          description?: string;
-
-          /**
-           * Nested properties of the input
-           */
-          properties?: { [key: string]: unknown };
-
-          /**
-           * The template of the input
-           */
-          template?: string;
-
-          /**
-           * The value of the input
-           */
-          value?: string;
-        }
+        variables?: { [key: string]: unknown };
       }
 
       export interface RuntimeArgument {
@@ -479,56 +381,7 @@ export namespace ServerResponse {
         /**
          * The variables of the input
          */
-        variables?: { [key: string]: RuntimeArgument.Variables };
-      }
-
-      export namespace RuntimeArgument {
-        export interface Variables {
-          /**
-           * The format of the input
-           */
-          format: 'string' | 'number' | 'boolean' | 'file_path';
-
-          /**
-           * Whether the input is required
-           */
-          isRequired: boolean;
-
-          /**
-           * Whether the input is a secret
-           */
-          isSecret: boolean;
-
-          /**
-           * The choices of the input
-           */
-          choices?: Array<string>;
-
-          /**
-           * The default value of the input
-           */
-          default?: string;
-
-          /**
-           * The description of the input
-           */
-          description?: string;
-
-          /**
-           * Nested properties of the input
-           */
-          properties?: { [key: string]: unknown };
-
-          /**
-           * The template of the input
-           */
-          template?: string;
-
-          /**
-           * The value of the input
-           */
-          value?: string;
-        }
+        variables?: { [key: string]: unknown };
       }
     }
 
@@ -800,56 +653,7 @@ export namespace ServerListResponse {
         /**
          * The variables of the input
          */
-        variables?: { [key: string]: EnvironmentVariable.Variables };
-      }
-
-      export namespace EnvironmentVariable {
-        export interface Variables {
-          /**
-           * The format of the input
-           */
-          format: 'string' | 'number' | 'boolean' | 'file_path';
-
-          /**
-           * Whether the input is required
-           */
-          isRequired: boolean;
-
-          /**
-           * Whether the input is a secret
-           */
-          isSecret: boolean;
-
-          /**
-           * The choices of the input
-           */
-          choices?: Array<string>;
-
-          /**
-           * The default value of the input
-           */
-          default?: string;
-
-          /**
-           * The description of the input
-           */
-          description?: string;
-
-          /**
-           * Nested properties of the input
-           */
-          properties?: { [key: string]: unknown };
-
-          /**
-           * The template of the input
-           */
-          template?: string;
-
-          /**
-           * The value of the input
-           */
-          value?: string;
-        }
+        variables?: { [key: string]: unknown };
       }
 
       export interface PackageArgument {
@@ -921,56 +725,7 @@ export namespace ServerListResponse {
         /**
          * The variables of the input
          */
-        variables?: { [key: string]: PackageArgument.Variables };
-      }
-
-      export namespace PackageArgument {
-        export interface Variables {
-          /**
-           * The format of the input
-           */
-          format: 'string' | 'number' | 'boolean' | 'file_path';
-
-          /**
-           * Whether the input is required
-           */
-          isRequired: boolean;
-
-          /**
-           * Whether the input is a secret
-           */
-          isSecret: boolean;
-
-          /**
-           * The choices of the input
-           */
-          choices?: Array<string>;
-
-          /**
-           * The default value of the input
-           */
-          default?: string;
-
-          /**
-           * The description of the input
-           */
-          description?: string;
-
-          /**
-           * Nested properties of the input
-           */
-          properties?: { [key: string]: unknown };
-
-          /**
-           * The template of the input
-           */
-          template?: string;
-
-          /**
-           * The value of the input
-           */
-          value?: string;
-        }
+        variables?: { [key: string]: unknown };
       }
 
       export interface RuntimeArgument {
@@ -1042,56 +797,7 @@ export namespace ServerListResponse {
         /**
          * The variables of the input
          */
-        variables?: { [key: string]: RuntimeArgument.Variables };
-      }
-
-      export namespace RuntimeArgument {
-        export interface Variables {
-          /**
-           * The format of the input
-           */
-          format: 'string' | 'number' | 'boolean' | 'file_path';
-
-          /**
-           * Whether the input is required
-           */
-          isRequired: boolean;
-
-          /**
-           * Whether the input is a secret
-           */
-          isSecret: boolean;
-
-          /**
-           * The choices of the input
-           */
-          choices?: Array<string>;
-
-          /**
-           * The default value of the input
-           */
-          default?: string;
-
-          /**
-           * The description of the input
-           */
-          description?: string;
-
-          /**
-           * Nested properties of the input
-           */
-          properties?: { [key: string]: unknown };
-
-          /**
-           * The template of the input
-           */
-          template?: string;
-
-          /**
-           * The value of the input
-           */
-          value?: string;
-        }
+        variables?: { [key: string]: unknown };
       }
     }
 
