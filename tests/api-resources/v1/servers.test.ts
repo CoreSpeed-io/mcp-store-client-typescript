@@ -13,8 +13,8 @@ describe('resource servers', () => {
     const responsePromise = client.v1.servers.create({
       description: 'description',
       name: 'name',
-      repository: {},
-      versionDetail: {},
+      repository: { foo: 'bar' },
+      versionDetail: { foo: 'bar' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,8 +30,8 @@ describe('resource servers', () => {
     const response = await client.v1.servers.create({
       description: 'description',
       name: 'name',
-      repository: {},
-      versionDetail: {},
+      repository: { foo: 'bar' },
+      versionDetail: { foo: 'bar' },
       icon: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
@@ -70,8 +70,8 @@ describe('resource servers', () => {
           description: 'description',
           icon: await toFile(Buffer.from('# my file contents'), 'README.md'),
           name: 'name',
-          repository: {},
-          versionDetail: {},
+          repository: { foo: 'bar' },
+          versionDetail: { foo: 'bar' },
         },
         { path: '/_stainless_unknown_path' },
       ),

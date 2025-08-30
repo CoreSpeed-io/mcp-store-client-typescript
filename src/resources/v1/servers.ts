@@ -672,12 +672,12 @@ export interface ServerCreateParams {
   /**
    * Repository information
    */
-  repository: unknown;
+  repository: { [key: string]: unknown };
 
   /**
    * Version details
    */
-  versionDetail: unknown;
+  versionDetail: { [key: string]: unknown };
 
   /**
    * Optional server icon image file
@@ -704,12 +704,12 @@ export interface ServerUpdateParams {
   /**
    * Repository information
    */
-  repository?: unknown;
+  repository?: { [key: string]: unknown };
 
   /**
    * Version details
    */
-  versionDetail?: unknown;
+  versionDetail?: { [key: string]: unknown };
 }
 
 export interface ServerListParams {
