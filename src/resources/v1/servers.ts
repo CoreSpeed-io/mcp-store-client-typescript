@@ -455,30 +455,30 @@ export namespace ServerResponse {
 
 export interface ServerListResponse {
   /**
-   * Number of servers returned in this response
-   */
-  count: number;
-
-  data: Array<ServerListResponse.Data>;
-
-  /**
    * Maximum number of servers requested
    */
   limit: number;
 
   /**
-   * Number of servers skipped
+   * Number of servers returned in this response
    */
-  offset: number;
+  my_count: number;
+
+  my_data: Array<ServerListResponse.MyData>;
 
   /**
    * Total number of servers available
    */
-  total: number;
+  my_total: number;
+
+  /**
+   * Number of servers skipped
+   */
+  offset: number;
 }
 
 export namespace ServerListResponse {
-  export interface Data {
+  export interface MyData {
     /**
      * The unique identifier of the MCP server
      */
@@ -497,12 +497,12 @@ export namespace ServerListResponse {
     /**
      * The repository information
      */
-    repository: Data.Repository;
+    repository: MyData.Repository;
 
     /**
      * The version details
      */
-    versionDetail: Data.VersionDetail;
+    versionDetail: MyData.VersionDetail;
 
     /**
      * The image URL of the MCP server
@@ -512,15 +512,15 @@ export namespace ServerListResponse {
     /**
      * The packages of the MCP server
      */
-    packages?: Array<Data.Package>;
+    packages?: Array<MyData.Package>;
 
     /**
      * The remote connections of the MCP server
      */
-    remotes?: Array<Data.Remote>;
+    remotes?: Array<MyData.Remote>;
   }
 
-  export namespace Data {
+  export namespace MyData {
     /**
      * The repository information
      */
@@ -936,12 +936,12 @@ export namespace ServerListParams {
     /**
      * The maximum number of elements to fetch.
      */
-    limit?: string;
+    my_limit?: string;
 
     /**
      * The number of elements to skip.
      */
-    offset?: string;
+    my_offset?: string;
 
     /**
      * Search term to filter servers by name or description
