@@ -22,5 +22,5 @@ Methods:
 - <code title="post /api/v1/servers">client.v1.servers.<a href="./src/resources/v1/servers.ts">create</a>({ ...params }) -> ServerResponse</code>
 - <code title="get /api/v1/servers/{id}">client.v1.servers.<a href="./src/resources/v1/servers.ts">retrieve</a>(id) -> ServerResponse</code>
 - <code title="put /api/v1/servers/{id}">client.v1.servers.<a href="./src/resources/v1/servers.ts">update</a>(id, { ...params }) -> ServerResponse</code>
-- <code title="get /api/v1/servers">client.v1.servers.<a href="./src/resources/v1/servers.ts">list</a>({ ...params }) -> ServerListResponse</code>
+- <code title="get /api/v1/servers">client.v1.servers.<a href="./src/resources/v1/servers.ts">list</a>({ ...params }) -> ServerListResponsesOffsetPage</code>
 - <code title="delete /api/v1/servers/{id}">client.v1.servers.<a href="./src/resources/v1/servers.ts">delete</a>(id) -> ServerDeleteResponse</code>
