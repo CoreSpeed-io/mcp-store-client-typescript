@@ -454,9 +454,27 @@ export namespace ServerResponse {
 }
 
 export interface ServerListResponse {
+  /**
+   * Number of servers returned in this response
+   */
   count: number;
 
   data: Array<ServerListResponse.Data>;
+
+  /**
+   * Maximum number of servers requested
+   */
+  limit: number;
+
+  /**
+   * Number of servers skipped
+   */
+  offset: number;
+
+  /**
+   * Total number of servers available
+   */
+  total: number;
 }
 
 export namespace ServerListResponse {
@@ -919,6 +937,16 @@ export namespace ServerListParams {
      * Maximum number of servers to return
      */
     limit?: string;
+
+    /**
+     * Number of servers to skip for pagination
+     */
+    offset?: string;
+
+    /**
+     * Search term to filter servers by name or description
+     */
+    search?: string;
 
     /**
      * Field to sort by
