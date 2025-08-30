@@ -12,6 +12,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/servers.ts">Argument</a></code>
 - <code><a href="./src/resources/v1/servers.ts">ServerResponse</a></code>
 - <code><a href="./src/resources/v1/servers.ts">ServerListResponse</a></code>
 - <code><a href="./src/resources/v1/servers.ts">ServerDeleteResponse</a></code>

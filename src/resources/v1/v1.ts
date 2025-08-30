@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as ServersAPI from './servers';
 import {
+  Argument,
   ServerCreateParams,
   ServerDeleteResponse,
   ServerListParams,
@@ -38,6 +39,7 @@ export declare namespace V1 {
 
   export {
     Servers as Servers,
+    type Argument as Argument,
     type ServerResponse as ServerResponse,
     type ServerListResponse as ServerListResponse,
     type ServerDeleteResponse as ServerDeleteResponse,
