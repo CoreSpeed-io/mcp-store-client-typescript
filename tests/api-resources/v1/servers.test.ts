@@ -97,8 +97,8 @@ describe('resource servers', () => {
       client.v1.servers.list(
         {
           '#/components/schemas/ServerListQuery': {
-            my_limit: '10',
-            my_offset: '0',
+            limit: '10',
+            offset: '0',
             search: 'serverName',
             sort: 'updatedAt',
           },
