@@ -9,5 +9,6 @@ export {
   type ServerCreateParams,
   type ServerUpdateParams,
   type ServerListParams,
+  type ServerListResponsesOffsetPage,
 } from './servers';
 export { V1, type V1HealthCheckResponse } from './v1';
