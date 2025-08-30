@@ -1,4 +1,4 @@
 configured_endpoints: 6
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/corespeed-inc-dash%2Fmcp-store-client-20f6a4dd9895f699ec10bd65815d0aca5396549d50a8093bfae558cc8f40191d.yml
-openapi_spec_hash: 505fc827f1b8666452313de48fadc492
-config_hash: 6544439f64d1ae0607be40ad49d69bff
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/corespeed-inc-dash%2Fmcp-store-client-18609dcbaa6dede438deca8d629eed24f004f7d64bfa08560154d05935d9f36e.yml
+openapi_spec_hash: 2e3d7254ea9d56b11674cf93afbca61b
+config_hash: 9ef9cbf47c6f6aa023dca849966abdbe

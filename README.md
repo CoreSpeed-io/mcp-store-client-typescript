@@ -2,7 +2,7 @@
 
 [![NPM version](<https://img.shields.io/npm/v/mcp-store-client.svg?label=npm%20(stable)>)](https://npmjs.org/package/mcp-store-client) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/mcp-store-client)
 
-This library provides convenient access to the Core Speed REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Mcp Store Client REST API from server-side TypeScript or JavaScript.
 
 The full API of this library can be found in [api.md](api.md).
 
@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/mcp-store-client-typescript.git
+npm install git+ssh://git@github.com:CoreSpeed-io/mcp-store-client-typescript.git
 ```
 
 > [!NOTE]
@@ -23,9 +23,9 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   apiKey: process.env['MCP_STORE_CLIENT_API_KEY'], // This is the default and can be omitted
   environment: 'environment_1', // defaults to 'production'
 });
@@ -41,14 +41,14 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   apiKey: process.env['MCP_STORE_CLIENT_API_KEY'], // This is the default and can be omitted
   environment: 'environment_1', // defaults to 'production'
 });
 
-const response: CoreSpeed.V1HealthCheckResponse = await client.v1.healthCheck();
+const response: McpStoreClient.V1HealthCheckResponse = await client.v1.healthCheck();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -64,16 +64,16 @@ Request parameters that correspond to file uploads can be passed in many differe
 
 ```ts
 import fs from 'fs';
-import CoreSpeed, { toFile } from 'mcp-store-client';
+import McpStoreClient, { toFile } from 'mcp-store-client';
 
-const client = new CoreSpeed();
+const client = new McpStoreClient();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: fs.createReadStream('/path/to/file'),
 });
 
@@ -81,8 +81,8 @@ await client.v1.servers.create({
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: new File(['my bytes'], 'file'),
 });
 
@@ -90,8 +90,8 @@ await client.v1.servers.create({
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: await fetch('https://somesite/file'),
 });
 
@@ -99,15 +99,15 @@ await client.v1.servers.create({
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: await toFile(Buffer.from('my bytes'), 'file'),
 });
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: await toFile(new Uint8Array([0, 1, 2]), 'file'),
 });
 ```
@@ -121,7 +121,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const response = await client.v1.healthCheck().catch(async (err) => {
-  if (err instanceof CoreSpeed.APIError) {
+  if (err instanceof McpStoreClient.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
     console.log(err.headers); // {server: 'nginx', ...}
@@ -155,7 +155,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   maxRetries: 0, // default is 2
 });
 
@@ -172,7 +172,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
@@ -186,6 +186,37 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Auto-pagination
+
+List methods in the McpStoreClient API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllServerListResponses(params) {
+  const allServerListResponses = [];
+  // Automatically fetches more pages as needed.
+  for await (const serverListResponse of client.v1.servers.list()) {
+    allServerListResponses.push(serverListResponse);
+  }
+  return allServerListResponses;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.v1.servers.list();
+for (const serverListResponse of page.data) {
+  console.log(serverListResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
@@ -198,7 +229,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new CoreSpeed();
+const client = new McpStoreClient();
 
 const response = await client.v1.healthCheck().asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -219,13 +250,13 @@ console.log(response.message);
 
 The log level can be configured in two ways:
 
-1. Via the `CORE_SPEED_LOG` environment variable
+1. Via the `MCP_STORE_CLIENT_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -251,13 +282,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new CoreSpeed({
-  logger: logger.child({ name: 'CoreSpeed' }),
+const client = new McpStoreClient({
+  logger: logger.child({ name: 'McpStoreClient' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -320,10 +351,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 import fetch from 'my-fetch';
 
-const client = new CoreSpeed({ fetch });
+const client = new McpStoreClient({ fetch });
 ```
 
 ### Fetch options
@@ -331,9 +362,9 @@ const client = new CoreSpeed({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -348,11 +379,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -362,9 +393,9 @@ const client = new CoreSpeed({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import CoreSpeed from 'mcp-store-client';
+import McpStoreClient from 'mcp-store-client';
 
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -374,10 +405,10 @@ const client = new CoreSpeed({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import CoreSpeed from 'npm:mcp-store-client';
+import McpStoreClient from 'npm:mcp-store-client';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   fetchOptions: {
     client: httpClient,
   },
@@ -396,7 +427,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/mcp-store-client-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/CoreSpeed-io/mcp-store-client-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
