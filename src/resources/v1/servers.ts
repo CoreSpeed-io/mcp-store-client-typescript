@@ -455,30 +455,20 @@ export namespace ServerResponse {
 
 export interface ServerListResponse {
   /**
-   * Maximum number of servers requested
-   */
-  limit: number;
-
-  /**
    * Number of servers returned in this response
    */
-  my_count: number;
+  count: number;
 
-  my_data: Array<ServerListResponse.MyData>;
+  data: Array<ServerListResponse.Data>;
 
   /**
    * Total number of servers available
    */
   my_total: number;
-
-  /**
-   * Number of servers skipped
-   */
-  offset: number;
 }
 
 export namespace ServerListResponse {
-  export interface MyData {
+  export interface Data {
     /**
      * The unique identifier of the MCP server
      */
@@ -497,12 +487,12 @@ export namespace ServerListResponse {
     /**
      * The repository information
      */
-    repository: MyData.Repository;
+    repository: Data.Repository;
 
     /**
      * The version details
      */
-    versionDetail: MyData.VersionDetail;
+    versionDetail: Data.VersionDetail;
 
     /**
      * The image URL of the MCP server
@@ -512,15 +502,15 @@ export namespace ServerListResponse {
     /**
      * The packages of the MCP server
      */
-    packages?: Array<MyData.Package>;
+    packages?: Array<Data.Package>;
 
     /**
      * The remote connections of the MCP server
      */
-    remotes?: Array<MyData.Remote>;
+    remotes?: Array<Data.Remote>;
   }
 
-  export namespace MyData {
+  export namespace Data {
     /**
      * The repository information
      */
