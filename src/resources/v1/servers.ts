@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as ServersAPI from './servers';
 import { APIPromise } from '../../core/api-promise';
 import { type Uploadable } from '../../core/uploads';
 import { RequestOptions } from '../../internal/request-options';
@@ -55,6 +56,78 @@ export class Servers extends APIResource {
   delete(id: string, options?: RequestOptions): APIPromise<ServerDeleteResponse> {
     return this._client.delete(path`/api/v1/servers/${id}`, options);
   }
+}
+
+export interface Argument {
+  /**
+   * The format of the input
+   */
+  format: 'string' | 'number' | 'boolean' | 'file_path';
+
+  /**
+   * Whether the input is required
+   */
+  isRequired: boolean;
+
+  /**
+   * Whether the input is a secret
+   */
+  isSecret: boolean;
+
+  /**
+   * The type of the argument (positional or named)
+   */
+  type: 'positional' | 'named';
+
+  /**
+   * The choices of the input
+   */
+  choices?: Array<string>;
+
+  /**
+   * The default value of the input
+   */
+  default?: string;
+
+  /**
+   * The description of the input
+   */
+  description?: string;
+
+  /**
+   * Whether the argument can be repeated
+   */
+  isRepeated?: boolean;
+
+  /**
+   * The name of the argument
+   */
+  name?: string;
+
+  /**
+   * Nested properties of the input
+   */
+  properties?: { [key: string]: unknown };
+
+  /**
+   * The template of the input
+   */
+  template?: string;
+
+  /**
+   * The value of the input
+   */
+  value?: string;
+
+  /**
+   * Hint for the argument value
+   */
+  valueHint?: string;
+
+  /**
+   * The variables of the input
+   */
+  variables?: { [key: string]: unknown };
 }
 
 export interface ServerResponse {
@@ -169,12 +242,12 @@ export namespace ServerResponse {
       /**
        * The package arguments of the MCP server
        */
-      packageArguments?: Array<Package.PackageArgument>;
+      packageArguments?: Array<ServersAPI.Argument>;
 
       /**
        * The runtime arguments of the MCP server
        */
-      runtimeArguments?: Array<Package.RuntimeArgument>;
+      runtimeArguments?: Array<ServersAPI.Argument>;
 
       /**
        * The runtime hint of the MCP server
@@ -233,150 +306,6 @@ export namespace ServerResponse {
          * The value of the input
          */
         value?: string;
-
-        /**
-         * The variables of the input
-         */
-        variables?: { [key: string]: unknown };
-      }
-
-      export interface PackageArgument {
-        /**
-         * The format of the input
-         */
-        format: 'string' | 'number' | 'boolean' | 'file_path';
-
-        /**
-         * Whether the input is required
-         */
-        isRequired: boolean;
-
-        /**
-         * Whether the input is a secret
-         */
-        isSecret: boolean;
-
-        /**
-         * The type of the argument (positional or named)
-         */
-        type: 'positional' | 'named';
-
-        /**
-         * The choices of the input
-         */
-        choices?: Array<string>;
-
-        /**
-         * The default value of the input
-         */
-        default?: string;
-
-        /**
-         * The description of the input
-         */
-        description?: string;
-
-        /**
-         * Whether the argument can be repeated
-         */
-        isRepeated?: boolean;
-
-        /**
-         * The name of the argument
-         */
-        name?: string;
-
-        /**
-         * Nested properties of the input
-         */
-        properties?: { [key: string]: unknown };
-
-        /**
-         * The template of the input
-         */
-        template?: string;
-
-        /**
-         * The value of the input
-         */
-        value?: string;
-
-        /**
-         * Hint for the argument value
-         */
-        valueHint?: string;
-
-        /**
-         * The variables of the input
-         */
-        variables?: { [key: string]: unknown };
-      }
-
-      export interface RuntimeArgument {
-        /**
-         * The format of the input
-         */
-        format: 'string' | 'number' | 'boolean' | 'file_path';
-
-        /**
-         * Whether the input is required
-         */
-        isRequired: boolean;
-
-        /**
-         * Whether the input is a secret
-         */
-        isSecret: boolean;
-
-        /**
-         * The type of the argument (positional or named)
-         */
-        type: 'positional' | 'named';
-
-        /**
-         * The choices of the input
-         */
-        choices?: Array<string>;
-
-        /**
-         * The default value of the input
-         */
-        default?: string;
-
-        /**
-         * The description of the input
-         */
-        description?: string;
-
-        /**
-         * Whether the argument can be repeated
-         */
-        isRepeated?: boolean;
-
-        /**
-         * The name of the argument
-         */
-        name?: string;
-
-        /**
-         * Nested properties of the input
-         */
-        properties?: { [key: string]: unknown };
-
-        /**
-         * The template of the input
-         */
-        template?: string;
-
-        /**
-         * The value of the input
-         */
-        value?: string;
-
-        /**
-         * Hint for the argument value
-         */
-        valueHint?: string;
 
         /**
          * The variables of the input
@@ -585,12 +514,12 @@ export namespace ServerListResponse {
       /**
        * The package arguments of the MCP server
        */
-      packageArguments?: Array<Package.PackageArgument>;
+      packageArguments?: Array<ServersAPI.Argument>;
 
       /**
        * The runtime arguments of the MCP server
        */
-      runtimeArguments?: Array<Package.RuntimeArgument>;
+      runtimeArguments?: Array<ServersAPI.Argument>;
 
       /**
        * The runtime hint of the MCP server
@@ -649,150 +578,6 @@ export namespace ServerListResponse {
          * The value of the input
          */
         value?: string;
-
-        /**
-         * The variables of the input
-         */
-        variables?: { [key: string]: unknown };
-      }
-
-      export interface PackageArgument {
-        /**
-         * The format of the input
-         */
-        format: 'string' | 'number' | 'boolean' | 'file_path';
-
-        /**
-         * Whether the input is required
-         */
-        isRequired: boolean;
-
-        /**
-         * Whether the input is a secret
-         */
-        isSecret: boolean;
-
-        /**
-         * The type of the argument (positional or named)
-         */
-        type: 'positional' | 'named';
-
-        /**
-         * The choices of the input
-         */
-        choices?: Array<string>;
-
-        /**
-         * The default value of the input
-         */
-        default?: string;
-
-        /**
-         * The description of the input
-         */
-        description?: string;
-
-        /**
-         * Whether the argument can be repeated
-         */
-        isRepeated?: boolean;
-
-        /**
-         * The name of the argument
-         */
-        name?: string;
-
-        /**
-         * Nested properties of the input
-         */
-        properties?: { [key: string]: unknown };
-
-        /**
-         * The template of the input
-         */
-        template?: string;
-
-        /**
-         * The value of the input
-         */
-        value?: string;
-
-        /**
-         * Hint for the argument value
-         */
-        valueHint?: string;
-
-        /**
-         * The variables of the input
-         */
-        variables?: { [key: string]: unknown };
-      }
-
-      export interface RuntimeArgument {
-        /**
-         * The format of the input
-         */
-        format: 'string' | 'number' | 'boolean' | 'file_path';
-
-        /**
-         * Whether the input is required
-         */
-        isRequired: boolean;
-
-        /**
-         * Whether the input is a secret
-         */
-        isSecret: boolean;
-
-        /**
-         * The type of the argument (positional or named)
-         */
-        type: 'positional' | 'named';
-
-        /**
-         * The choices of the input
-         */
-        choices?: Array<string>;
-
-        /**
-         * The default value of the input
-         */
-        default?: string;
-
-        /**
-         * The description of the input
-         */
-        description?: string;
-
-        /**
-         * Whether the argument can be repeated
-         */
-        isRepeated?: boolean;
-
-        /**
-         * The name of the argument
-         */
-        name?: string;
-
-        /**
-         * Nested properties of the input
-         */
-        properties?: { [key: string]: unknown };
-
-        /**
-         * The template of the input
-         */
-        template?: string;
-
-        /**
-         * The value of the input
-         */
-        value?: string;
-
-        /**
-         * Hint for the argument value
-         */
-        valueHint?: string;
 
         /**
          * The variables of the input
@@ -977,6 +762,7 @@ export namespace ServerListParams {
 
 export declare namespace Servers {
   export {
+    type Argument as Argument,
     type ServerResponse as ServerResponse,
     type ServerListResponse as ServerListResponse,
     type ServerDeleteResponse as ServerDeleteResponse,

@@ -2,6 +2,7 @@
 
 export {
   Servers,
+  type Argument,
   type ServerResponse,
   type ServerListResponse,
   type ServerDeleteResponse,
