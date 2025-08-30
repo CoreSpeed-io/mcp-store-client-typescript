@@ -462,9 +462,19 @@ export interface ServerListResponse {
   data: Array<ServerListResponse.Data>;
 
   /**
+   * Maximum number of servers requested
+   */
+  limit: number;
+
+  /**
+   * Number of servers skipped
+   */
+  offset: number;
+
+  /**
    * Total number of servers available
    */
-  my_total: number;
+  total: number;
 }
 
 export namespace ServerListResponse {
@@ -924,14 +934,14 @@ export interface ServerListParams {
 export namespace ServerListParams {
   export interface ComponentsSchemasServerListQuery {
     /**
-     * The maximum number of elements to fetch.
+     * Maximum number of servers to return
      */
-    my_limit?: string;
+    limit?: string;
 
     /**
-     * The number of elements to skip.
+     * Number of servers to skip for pagination
      */
-    my_offset?: string;
+    offset?: string;
 
     /**
      * Search term to filter servers by name or description
