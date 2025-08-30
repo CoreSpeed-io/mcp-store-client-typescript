@@ -934,12 +934,12 @@ export interface ServerListParams {
 export namespace ServerListParams {
   export interface ComponentsSchemasServerListQuery {
     /**
-     * Maximum number of servers to return
+     * The maximum number of elements to fetch.
      */
     limit?: string;
 
     /**
-     * Number of servers to skip for pagination
+     * The number of elements to skip.
      */
     offset?: string;
 
