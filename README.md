@@ -72,8 +72,8 @@ const client = new McpStoreClient();
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: fs.createReadStream('/path/to/file'),
 });
 
@@ -81,8 +81,8 @@ await client.v1.servers.create({
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: new File(['my bytes'], 'file'),
 });
 
@@ -90,8 +90,8 @@ await client.v1.servers.create({
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: await fetch('https://somesite/file'),
 });
 
@@ -99,15 +99,15 @@ await client.v1.servers.create({
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: await toFile(Buffer.from('my bytes'), 'file'),
 });
 await client.v1.servers.create({
   description: 'description',
   name: 'name',
-  repository: {},
-  versionDetail: {},
+  repository: { foo: 'bar' },
+  versionDetail: { foo: 'bar' },
   icon: await toFile(new Uint8Array([0, 1, 2]), 'file'),
 });
 ```
