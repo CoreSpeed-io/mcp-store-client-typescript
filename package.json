@@ -1,12 +1,12 @@
 {
   "name": "mcp-store-client",
-  "version": "0.0.1",
-  "description": "The official TypeScript library for the Core Speed API",
-  "author": "Core Speed <contact@corespeed.io>",
+  "version": "0.1.0",
+  "description": "The official TypeScript library for the Mcp Store Client API",
+  "author": "Mcp Store Client <contact@corespeed.io>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/mcp-store-client-typescript",
+  "repository": "github:CoreSpeed-io/mcp-store-client-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [

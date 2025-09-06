@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import CoreSpeed, { toFile } from 'mcp-store-client';
+import McpStoreClient, { toFile } from 'mcp-store-client';
 
-const client = new CoreSpeed({
+const client = new McpStoreClient({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -13,8 +13,8 @@ describe('resource servers', () => {
     const responsePromise = client.v1.servers.create({
       description: 'description',
       name: 'name',
-      repository: {},
-      versionDetail: {},
+      repository: { foo: 'bar' },
+      versionDetail: { foo: 'bar' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,8 +30,8 @@ describe('resource servers', () => {
     const response = await client.v1.servers.create({
       description: 'description',
       name: 'name',
-      repository: {},
-      versionDetail: {},
+      repository: { foo: 'bar' },
+      versionDetail: { foo: 'bar' },
       icon: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
@@ -70,12 +70,12 @@ describe('resource servers', () => {
           description: 'description',
           icon: await toFile(Buffer.from('# my file contents'), 'README.md'),
           name: 'name',
-          repository: {},
-          versionDetail: {},
+          repository: { foo: 'bar' },
+          versionDetail: { foo: 'bar' },
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(CoreSpeed.NotFoundError);
+    ).rejects.toThrow(McpStoreClient.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -95,10 +95,21 @@ describe('resource servers', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.servers.list(
-        { '#/components/schemas/ServerListQuery': { limit: '10', sort: 'updatedAt' } },
+        {
+          '#/components/schemas/ServerListQuery': {
+            limit: 10,
+            offset: 0,
+            search: 'serverName',
+            sort: 'updatedAt',
+          },
+          limit: 10,
+          offset: 0,
+          search: 'serverName',
+          sort: 'updatedAt',
+        },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(CoreSpeed.NotFoundError);
+    ).rejects.toThrow(McpStoreClient.NotFoundError);
   });
 
   // Prism tests are disabled
