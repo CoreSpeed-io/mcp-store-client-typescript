@@ -1,6 +1,6 @@
 {
   "name": "mcp-store-client",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The official TypeScript library for the Mcp Store Client API",
   "author": "Mcp Store Client <contact@corespeed.io>",
   "types": "dist/index.d.ts",
